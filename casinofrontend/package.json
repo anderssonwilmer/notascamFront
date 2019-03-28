@@ -24,7 +24,9 @@
     "not op_mini all"
   ],
   "devDependencies": {},
-  "jest": {"verbose": true,"transform": {
+  "jest": {
+    "verbose": true,
+    "transform": {
       "^.+\\.jsx?$": "babel-jest"
     },
     "moduleNameMapper": {
@@ -34,5 +36,6 @@
     "moduleFileExtensions": [
       "js",
       "jsx"
-    ]}
+    ]
+  }
 }

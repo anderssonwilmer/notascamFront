@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 0.04s linear;
+  animation: App-logo-spin infinite 10s linear;
   height: 40vmin;
   pointer-events: none;
 }
@@ -17,6 +17,10 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.Message {
+  height: 150px;
 }
 
 .button {

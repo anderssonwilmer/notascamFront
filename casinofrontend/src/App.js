@@ -8,31 +8,49 @@ class App extends Component {
     super();
     this.state = {
       saldot: "",
-      message: ""
+      message: "",
+      isHidden: true,
+      disabledButton: false
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
-    axios
-      .get("http://localhost:8080/coinflip")
-      .then(response =>
-        this.setState({
-          saldot: response.data.Saldot,
-          message: response.data.Vinst
-        })
-      ); //console.log(response.data.Saldot)); //this.setState({ saldot: response.data.Saldot })
+    document.getElementsByClassName("App-logo")[0].style.animation =
+      "App-logo-spin infinite 1s linear";
+    this.setState({ isHidden: true, disabledButton: true });
+    axios.get("http://localhost:8080/coinflip").then(response => {
+      setTimeout(
+        function() {
+          this.setState({
+            saldot: response.data.Saldot,
+            message: response.data.Vinst,
+            isHidden: false,
+            disabledButton: false
+          });
+          document.getElementsByClassName("App-logo")[0].style.animation =
+            "App-logo-spin infinite 10s linear";
+        }.bind(this),
+        1000
+      );
+    });
   }
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <button className="button" onClick={this.handleClick}>
-            SPELA!!!
+          <button
+            disabled={this.state.disabledButton}
+            className="button"
+            onClick={this.handleClick}
+          >
+            Spela
           </button>
-          <p>{this.state.message}</p>
-          <p>Saldo: {this.state.saldot}kr</p>
+          <div className="Message">
+            {!this.state.isHidden && <p>{this.state.message}</p>}
+            {!this.state.isHidden && <span>Saldo: {this.state.saldot}kr</span>}
+          </div>
         </header>
       </div>
     );
