@@ -16,8 +16,9 @@ class App extends Component {
   }
 
   handleClick() {
-    document.getElementsByClassName("App-logo")[0].style.animation =
-      "App-logo-spin infinite 1s linear";
+    //document.getElementsByClassName("App-logo")[0].style.animation =
+    //  "App-logo-spin infinite 1s linear";
+    this.refs.Applogo.style.animation = "App-logo-spin infinite 1s linear";
     this.setState({ isHidden: true, disabledButton: true });
     axios.get("http://localhost:8080/coinflip").then(response => {
       setTimeout(
@@ -28,7 +29,7 @@ class App extends Component {
             isHidden: false,
             disabledButton: false
           });
-          document.getElementsByClassName("App-logo")[0].style.animation =
+          this.refs.Applogo.style.animation =
             "App-logo-spin infinite 10s linear";
         }.bind(this),
         1000
@@ -39,7 +40,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo} className="App-logo" alt="logo" ref="Applogo" />
           <button
             disabled={this.state.disabledButton}
             className="button"
